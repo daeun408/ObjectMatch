@@ -51,7 +51,10 @@ def featurePoint_sift(folder_path):#output_file
             # 키 포인트 그리기
             img_draw = cv2.drawKeypoints(image_result, kp, None, \
                                          flags=cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS) #flags=cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS
-            cv2.imshow('SIFT', img_draw)                                                    #flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+                                                                                            # flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+            # 이미지 크기 조정
+            img_draw = cv2.resize(img_draw, None, fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
+            cv2.imshow('SIFT', img_draw)
             cv2.waitKey()
             cv2.destroyAllWindows()
             """
@@ -151,8 +154,9 @@ def filter_matching_features_sift(all_features):
     return filtered_features
 
 
+folder_path = "./data/storedData/serum_galac"
 # <ORB 특징 추출>
-all_feature, objName = featurePoint_orb("./data/panda") #폴더 위치
+all_feature, objName = featurePoint_orb(folder_path) #폴더 위치
 # 특징점 필터링
 filtered_features = filter_matching_features_orb(all_feature)
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -162,10 +166,10 @@ print("총 사진 갯수 : " + str(len(all_feature)))
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 #특징점 numpy 배열 저장
 np.save('./descriptor/orb/' + objName, filtered_features)
-"""
+
 
 # <SIFT 특징 추출>
-all_feature, objName = featurePoint_sift("./data/jinBibim") #폴더 위치
+all_feature, objName = featurePoint_sift(folder_path) #폴더 위치
 # 특징점 필터링
 filtered_features = filter_matching_features_sift(all_feature)
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -175,4 +179,3 @@ print("총 사진 갯수 : " + str(len(all_feature)))
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 #특징점 numpy 배열 저장
 np.save('./descriptor/sift/' + objName, filtered_features)
-"""

@@ -1,10 +1,10 @@
 import os
 
-objName = "mandarinHandCream"
-
 # 변경할 폴더의 경로
-folder_path = "./data/" + objName
+folder_path = "./data/sunsrcreen_calming"
+objName = os.path.basename(folder_path)
 
+#print(objName)
 # 폴더 내의 모든 파일 목록 가져오기
 files = os.listdir(folder_path)
 
