@@ -1,3 +1,4 @@
+
 import os
 import numpy as np
 import cv2
@@ -36,21 +37,16 @@ def goodMatch_sift(desc, desc2):
                     if first.distance < second.distance * ratio]
     return len(good_matches)
 
-"""
+#"""
 # <ORB로 검색>
 folder_path = "./descriptor/orb"
 
 #폴더 내의 모든 npy 파일 읽어오기
 obj_data_desc_list, obj_name_list = read_npy_files_in_folder(folder_path)
 
-print("저장된 특징점 shape")
-#결과 확인
-for obj_data_desc in obj_data_desc_list:
-    #print(npy_data)
-    print(obj_data_desc.shape)
 print("-------------------------------------")
 #검색할 이미지
-image_path = "./data/A_newObj/panda.jpg"
+image_path = "./data/searchData/boardMarker.jpg"
 _search_object = os.path.basename(image_path)
 search_object =  os.path.splitext(_search_object)[0] #파일 이름에서 확장자 제거
 image = cv2.imread(image_path)
@@ -73,22 +69,17 @@ for i, obj_data_desc in  enumerate(obj_data_desc_list):
 print("-------------------------------------")
 print("입력한 사진 : " + search_object)
 print("조회된 물체 이름 : " + str(obj_name_list[most_similar_obj_num]))
-"""
-
+#"""
+###################################################################################
 # <SIFT로 검색>
 folder_path = "./descriptor/sift"
 
 #폴더 내의 모든 npy 파일 읽어오기
 obj_data_desc_list, obj_name_list = read_npy_files_in_folder(folder_path)
 
-print("저장된 특징점 shape")
-#결과 확인
-for obj_data_desc in obj_data_desc_list:
-    #print(npy_data)
-    print(obj_data_desc.shape)
 print("-------------------------------------")
 #검색할 이미지
-image_path = "./data/A_newObj/panda.jpg"
+image_path = "./data/searchData/boardMarker.jpg"
 _search_object = os.path.basename(image_path)
 search_object =  os.path.splitext(_search_object)[0] #파일 이름에서 확장자 제거
 image = cv2.imread(image_path)
@@ -99,7 +90,7 @@ kp, desc = detector_orb.detectAndCompute(image_result, None)
 most_similar_obj_num = 0 #가장 비슷한 물체 번호
 most_similar_obj_num_decs = -1 #가장 많은 특징점 수
 print("일치한 특징점 수")
-for i, obj_data_desc in  enumerate(obj_data_desc_list):
+for i, obj_data_desc in enumerate(obj_data_desc_list):
     goodMatch = goodMatch_sift(desc, obj_data_desc)
     print(obj_name_list[i] + " : " +str(goodMatch))
     #print("i : " + str(i))
