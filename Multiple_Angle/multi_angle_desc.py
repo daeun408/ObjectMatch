@@ -154,7 +154,7 @@ def filter_matching_features_sift(all_features):
     return filtered_features
 
 
-folder_path = "./data/storedData/serum_galac"
+folder_path = "./data/storedData/cup"
 # <ORB 특징 추출>
 all_feature, objName = featurePoint_orb(folder_path) #폴더 위치
 # 특징점 필터링

@@ -36,7 +36,7 @@ def goodMatch_sift(desc, desc2):
                     if first.distance < second.distance * ratio]
     return len(good_matches)
 
-#"""
+"""
 # <ORB로 검색>
 folder_path = "./descriptor/orb"
 
@@ -81,14 +81,15 @@ for count, search_object in enumerate(os.listdir(image_path)):
         print("입력한 사진 : " + search_object_name)
         print("조회된 물체 이름 : " + result_obj)
 
+print("------------")
 print("ORB ACCUARCY")
 print(str(orb_correct_num) + "/" + str(totalObj_num))
 print(str(orb_correct_num/totalObj_num) + "%")
-#"""
+"""
 
 #############################################################################################
 
-"""
+#"""
 # <SIFT로 검색>
 folder_path = "./descriptor/sift"
 
@@ -133,7 +134,8 @@ for count, search_object in enumerate(os.listdir(image_path)):
         print("입력한 사진 : " + search_object_name)
         print("조회된 물체 이름 : " + result_sift)
 
+print("------------")
 print("SIFT ACCUARCY")
 print(str(sift_correct_num) + "/" + str(totalObj_num))
 print(str(sift_correct_num / totalObj_num) + "%")
-"""
+#"""
