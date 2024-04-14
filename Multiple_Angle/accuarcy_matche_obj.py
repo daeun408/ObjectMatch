@@ -55,6 +55,15 @@ for count, search_object in enumerate(os.listdir(image_path)):
     _search_object_name = os.path.basename(search_object)
     search_object_name = os.path.splitext(_search_object_name)[0] #파일 이름에서 확장자 제거
     image = cv2.imread(image_path + "/" + search_object)
+      #이미지 크기 조정
+    height, width, _ = image.shape
+    if height >= width:
+        max_length = height
+    else:
+        max_length = width
+    if max_length >= 1400:
+        ratio = 1400 / max_length
+        image = cv2.resize(image, (int(width * ratio), int(height * ratio)),  interpolation=cv2.INTER_AREA)
     image_result = remove(image)
     #검색할 이미지 orb 추출
     detector_orb = cv2.ORB_create()
@@ -108,6 +117,15 @@ for count, search_object in enumerate(os.listdir(image_path)):
     _search_object_name = os.path.basename(search_object)
     search_object_name = os.path.splitext(_search_object_name)[0]  # 파일 이름에서 확장자 제거
     image = cv2.imread(image_path + "/" + search_object)
+    # 이미지 크기 조정
+    height, width, _ = image.shape
+    if height >= width:
+        max_length = height
+    else:
+        max_length = width
+    if max_length >= 1400:
+        ratio = 1400 / max_length
+        image = cv2.resize(image, (int(width * ratio), int(height * ratio)), interpolation=cv2.INTER_AREA)
     image_result = remove(image)
     # 검색할 이미지 sift 추출
     detector_sift = cv2.SIFT_create()

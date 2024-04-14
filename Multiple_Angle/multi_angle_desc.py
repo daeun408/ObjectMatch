@@ -13,6 +13,16 @@ def featurePoint_orb(folder_path):#output_file
         file_path = os.path.join(folder_path, filename)
         if os.path.isfile(file_path) and filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
             image = cv2.imread(file_path)
+            #이미지 크기 조정
+            height, width, _ = image.shape
+            if height >= width:
+                max_length = height
+            else:
+                max_length = width
+            if max_length >= 1400:
+                ratio = 1400 / max_length
+                image = cv2.resize(image, (int(width * ratio), int(height * ratio)),  interpolation=cv2.INTER_AREA)
+
             #image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) #COLOR_BGR2HSV #COLOR_BGR2RGB
             image_result = remove(image) #배경 제거
             kp, desc = detector_orb.detectAndCompute(image_result, None)  # detector.compute(image, keypoins, descriptors):
@@ -42,6 +52,15 @@ def featurePoint_sift(folder_path):#output_file
         file_path = os.path.join(folder_path, filename)
         if os.path.isfile(file_path) and filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
             image = cv2.imread(file_path)
+            #이미지 크기 조정
+            height, width, _ = image.shape
+            if height >= width:
+                max_length = height
+            else:
+                max_length = width
+            if max_length >= 1400:
+                ratio = 1400 / max_length
+                image = cv2.resize(image, (int(width * ratio), int(height * ratio)),  interpolation=cv2.INTER_AREA)
             #image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             image_result = remove(image)  # 배경 제거
             kp, desc = detector_sift.detectAndCompute(image_result, None)  # detector.compute(image, keypoins, descriptors):
@@ -53,7 +72,7 @@ def featurePoint_sift(folder_path):#output_file
                                          flags=cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS) #flags=cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS
                                                                                             # flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
             # 이미지 크기 조정
-            img_draw = cv2.resize(img_draw, None, fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
+            #img_draw = cv2.resize(img_draw, None, fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
             cv2.imshow('SIFT', img_draw)
             cv2.waitKey()
             cv2.destroyAllWindows()
@@ -113,7 +132,7 @@ def filter_matching_features_orb(all_features):
             filtered_features_count = len(filtered_features)
             for Idx in bad_desc_Idx:
                 filtered_features = np.append(filtered_features, [all_features[i][Idx]], axis=0) #다른 특징점 저장
-            print(str(i) + "번째 : 추가된 특징점 갯수 : " + str(len(filtered_features) - filtered_features_count))
+            print(str(i+1) + "번째 : 추가된 특징점 갯수 : " + str(len(filtered_features) - filtered_features_count))
             print("저장된 특징점 총 수 : " + str(len(filtered_features)))
             print("---------------------------------")
     return filtered_features
@@ -148,13 +167,13 @@ def filter_matching_features_sift(all_features):
             filtered_features_count = len(filtered_features)
             for Idx in bad_desc_Idx:
                 filtered_features = np.append(filtered_features, [all_features[i][Idx]], axis=0) #다른 특징점 저장
-            print(str(i) + "번째 : 추가된 특징점 갯수 : " + str(len(filtered_features) - filtered_features_count))
+            print(str(i+1) + "번째 : 추가된 특징점 갯수 : " + str(len(filtered_features) - filtered_features_count))
             print("저장된 특징점 총 수 : " + str(len(filtered_features)))
             print("---------------------------------")
     return filtered_features
 
 
-folder_path = "./data/storedData/cup"
+folder_path = "./data/storedData/ttosttos_ramen"
 # <ORB 특징 추출>
 all_feature, objName = featurePoint_orb(folder_path) #폴더 위치
 # 특징점 필터링
