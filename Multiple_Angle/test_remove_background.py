@@ -4,7 +4,7 @@ from PIL import Image
 import numpy as np
 # 이미지를 로드합니다.
 
-input = Image.open('./data/lactofit1.jpg') # load image
+input = Image.open('./data/storedData/ace/ace1.jpg') # load image
 output = remove(input) # remove background
 #output.save('rembg.PNG') # save image
 
