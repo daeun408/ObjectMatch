@@ -173,7 +173,7 @@ def filter_matching_features_sift(all_features):
     return filtered_features
 
 
-folder_path = "./data/storedData/wasabi_chip"
+folder_path = "./data/New/whiteOutTape_b"
 # <ORB 특징 추출>
 all_feature, objName = featurePoint_orb(folder_path) #폴더 위치
 # 특징점 필터링

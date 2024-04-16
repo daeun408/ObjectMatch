@@ -1,7 +1,7 @@
 import os
 
 # 변경할 폴더의 경로
-folder_path = "./data/storedData/wasabi_chip"
+folder_path = "./data/searchData/whiteOutTape_b"
 objName = os.path.basename(folder_path)
 
 #print(objName)
