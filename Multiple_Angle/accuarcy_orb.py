@@ -42,7 +42,7 @@ def goodMatch_sift(desc, desc2):
 
 
 # <ORB로 검색>
-folder_path = "./descriptor/orb"
+folder_path = "./descriptor_fixedNumber/orb"
 
 #폴더 내의 모든 npy 파일 읽어오기
 obj_data_desc_list, obj_name_list = read_npy_files_in_folder(folder_path)

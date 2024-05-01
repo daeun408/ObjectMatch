@@ -88,7 +88,7 @@ obj_data_desc_list, obj_name_list = read_npy_files_in_folder(folder_path)
 
 print("-------------------------------------")
 #검색할 이미지
-image_path = "./data/searchData/boardMarker.jpg"
+image_path = "./data/searchData/nike.jpg"
 _search_object = os.path.basename(image_path)
 search_object =  os.path.splitext(_search_object)[0] #파일 이름에서 확장자 제거
 image = cv2.imread(image_path)

@@ -100,7 +100,7 @@ print(str(orb_correct_num/totalObj_num) + "%")
 
 #"""
 # <SIFT로 검색>
-folder_path = "./descriptor/sift"
+folder_path = "./descriptor_fixedNumber/sift"
 
 # 폴더 내의 모든 npy 파일 읽어오기
 obj_data_desc_list, obj_name_list = read_npy_files_in_folder(folder_path)
@@ -112,7 +112,7 @@ print("-------------------------------------")
 sift_correct_num = 0
 
 # 검색할 이미지 폴더
-image_path = "./data/searchData"
+image_path = "./data/searchData_sift_fixedNumber"
 for count, search_object in enumerate(os.listdir(image_path)):
     _search_object_name = os.path.basename(search_object)
     search_object_name = os.path.splitext(_search_object_name)[0]  # 파일 이름에서 확장자 제거
